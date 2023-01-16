@@ -33,7 +33,6 @@ fun TopAppBar(
     contentColor: Color = Color(0xFFf4ddc6)
 ) {
     val focusManager = LocalFocusManager.current
-    val coroutineScope = rememberCoroutineScope()
 
     TopAppBar(
         navigationIcon = {

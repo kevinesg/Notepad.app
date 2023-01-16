@@ -17,7 +17,7 @@ fun NoteEntryScreen(
     navController: NavController
 ) {
     val onNavigateBack = {
-        if (viewModel.noteUiState.name != "") {
+        if (viewModel.noteUiState != viewModel.frozenNoteUiState && viewModel.noteUiState.name != "") {
             viewModel.showConfirmExitSave.value = true
         } else {
             navController.navigate(Screens.HOME.name) { popUpTo(0) }
@@ -29,7 +29,7 @@ fun NoteEntryScreen(
             EditNote(
                 viewModel = viewModel,
                 navController = navController,
-                frozenNoteUiState = NoteUiState(),
+                //frozenNoteUiState = NoteUiState(),
                 noteUiState = viewModel.noteUiState,
                 onValueChange = viewModel::updateUiState,
                 onNavigateBack = onNavigateBack,

@@ -19,6 +19,8 @@ open class GenericViewModel: ViewModel() {
     val showConfirmExitApp = mutableStateOf(false)
     val showSaveSnackbar = mutableStateOf(false)
 
+    open var frozenNoteUiState: NoteUiState? = null
+
     fun isActiveSave(uiState: NoteUiState): MutableState<Boolean> {
         return mutableStateOf(uiState.name.isNotBlank())
     }

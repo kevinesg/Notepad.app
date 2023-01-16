@@ -32,13 +32,14 @@ class NoteEditViewModel(
                 .filterNotNull()
                 .first()
                 .toNoteUiState()
+
+            val snapshot = Snapshot.takeSnapshot()
+            if (frozenNoteUiState == null) {
+                frozenNoteUiState = snapshot.enter { noteUiState }
+            }
         }
     }
 
-    private val initialUiState = noteUiState
-
-    private val snapshot = Snapshot.takeSnapshot()
-    val frozenNoteUiState = snapshot.enter { initialUiState }
 
     fun updateUiState(newNoteUiState: NoteUiState) {
         noteUiState = newNoteUiState

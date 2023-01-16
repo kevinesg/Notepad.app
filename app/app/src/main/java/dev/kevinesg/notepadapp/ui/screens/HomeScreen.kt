@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -49,10 +50,23 @@ fun HomeScreen(
                 isSaveEnabled = false
             )
             Column(modifier = Modifier.weight(0.8f)) {
-                NotesList(
-                    notesList = homeUiState.noteList,
-                    onNoteClick = onNoteClick
-                )
+                if (homeUiState.noteList.isEmpty()) {
+                    Column(
+                        modifier = Modifier.fillMaxSize(0.5f),
+                        verticalArrangement = Arrangement.Center
+                    ) {/*
+                        Text(
+                            text = "Click the button below to create your first note :)",
+                            color = Color(0xFFf4ddc6),
+                            textAlign = TextAlign.Center
+                        )*/
+                    }
+                } else {
+                    NotesList(
+                        notesList = homeUiState.noteList,
+                        onNoteClick = onNoteClick
+                    )
+                }
             }
             Column(
                 modifier = Modifier

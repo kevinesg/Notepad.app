@@ -10,6 +10,7 @@ import dev.kevinesg.notepadapp.EditNoteDestination
 import dev.kevinesg.notepadapp.Screens
 import dev.kevinesg.notepadapp.viewmodels.AppViewModelProvider
 import dev.kevinesg.notepadapp.viewmodels.NoteEditViewModel
+import dev.kevinesg.notepadapp.viewmodels.NoteUiState
 
 
 object NoteEditDestination: EditNoteDestination {
@@ -38,7 +39,7 @@ fun NoteEditScreen(
             EditNote(
                 viewModel = viewModel,
                 navController = navController,
-                frozenNoteUiState = viewModel.frozenNoteUiState,
+                //frozenNoteUiState = viewModel.frozenNoteUiState?: NoteUiState(),
                 noteUiState = viewModel.noteUiState,
                 onValueChange = viewModel::updateUiState,
                 onNavigateBack = onNavigateBack,

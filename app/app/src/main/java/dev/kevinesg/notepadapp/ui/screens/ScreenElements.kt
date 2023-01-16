@@ -23,7 +23,6 @@ fun EditNote(
     viewModel: GenericViewModel,
     navController: NavController,
     onNavigateBack: () -> Unit,
-    frozenNoteUiState: NoteUiState,
     noteUiState: NoteUiState,
     modifier: Modifier = Modifier,
     onValueChange: (NoteUiState) -> Unit = {  },
@@ -44,17 +43,22 @@ fun EditNote(
             onSaveClick = {
                 coroutineScope.launch {
                     viewModel.saveNote()
+                    }
+                coroutineScope.launch {
+                    viewModel.frozenNoteUiState = noteUiState
+                }
+                coroutineScope.launch {
                     viewModel.showSaveSnackbar.value = true
                     delay(1500)
                     viewModel.showSaveSnackbar.value = false
-                    }
+                }
                 if (navigateBackAfterSave) {
                     navController.navigate(Screens.HOME.name) {
                         popUpTo(0)
                     }
                 }
             },
-            isSaveEnabled = frozenNoteUiState != noteUiState && noteUiState.name != ""
+            isSaveEnabled = viewModel.frozenNoteUiState != noteUiState && noteUiState.name != ""
         )
 
         Column(modifier = Modifier.weight(0.8f)) {
